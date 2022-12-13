@@ -31,16 +31,16 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - run : cd /var/lib/
     - name: Build the Docker image
       run: docker build . -t bysdudent/node-web-app
     - run : docker images
     - run : docker info
-    - name: Upload frontend image as artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: bysdudent/node-web-app
-        path: /var/lib/docker/node-web-app.tar
+    # - name: Upload frontend image as artifact
+    #   uses: actions/upload-artifact@v2
+    #   with:
+    #     name: bysdudent/node-web-app
+    #     path: /var/lib/docker/node-web-app.tar
+    - run: docker save -o /tmp bysdudent/node-web-app:latest
 
   push:
     runs-on: ubuntu-latest
