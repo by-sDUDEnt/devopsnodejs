@@ -32,7 +32,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . -t bysdudent/node-web-app
+      run: docker build . -t node-web-app
     - run : docker images
     - run : docker info
     # - name: Upload frontend image as artifact
@@ -40,7 +40,10 @@ jobs:
     #   with:
     #     name: bysdudent/node-web-app
     #     path: /var/lib/docker/node-web-app.tar
-    - run: docker save -o /tmp/node-web-app.tar bysdudent/node-web-app:latest
+    
+    uses: ishworkh/docker-image-artifact-upload@v1
+    with:
+      image: "node-web-app:latest"
 
   push:
     runs-on: ubuntu-latest
@@ -52,7 +55,10 @@ jobs:
         DOCKER_USER: ${{ secrets.DOCKER_USER }}
         DOCKER_PASSWORD : ${{ secrets.DOCKER_PASSWORD }}
       run : docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-    - run : docker load -i tmp/node-web-app.tar  
+     - uses: ishworkh/docker-image-artifact-download@v1
+       with:
+         image: "node-web-app:latest"
+
     - run : docker images
     - name: Push to DockerHub
       run: docker push bysdudent/node-web-app
