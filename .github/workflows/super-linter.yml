@@ -61,7 +61,6 @@ jobs:
     - run : docker images
     - run : docker image tag node-web-app:latest bysdudent/node-web-app:latest
     - run : docker images
-    - run : docker load node-web-app
     - name: Push to DockerHub
       run: docker push bysdudent/node-web-app
 
