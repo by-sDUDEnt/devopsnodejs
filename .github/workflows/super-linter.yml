@@ -40,7 +40,7 @@ jobs:
     #   with:
     #     name: bysdudent/node-web-app
     #     path: /var/lib/docker/node-web-app.tar
-    - run: docker save -o /tmp bysdudent/node-web-app:latest
+    - run: docker save -o /tmp/node-web-app.tar bysdudent/node-web-app:latest
 
   push:
     runs-on: ubuntu-latest
