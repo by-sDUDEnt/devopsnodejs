@@ -11,24 +11,24 @@ on:
     branches: [ "main" ]
   workflow_dispatch:
 jobs:
-  run-lint:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-        with:
-          # Full git history is needed to get a proper list of changed files within `super-linter`
-          fetch-depth: 0
+  # run-lint:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v3
+  #       with:
+  #         # Full git history is needed to get a proper list of changed files within `super-linter`
+  #         fetch-depth: 0
 
-      - name: Lint Code Base
-        uses: github/super-linter@v4
-        env:
-          VALIDATE_ALL_CODEBASE: false
-          DEFAULT_BRANCH: "main"
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  #     - name: Lint Code Base
+  #       uses: github/super-linter@v4
+  #       env:
+  #         VALIDATE_ALL_CODEBASE: false
+  #         DEFAULT_BRANCH: "main"
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   build:
     runs-on: ubuntu-latest
-    needs: [run-lint]
+    # needs: [run-lint]
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
@@ -53,8 +53,8 @@ jobs:
       with:
           image: "node-web-app:latest"
     - run : docker images
-    - run : docker image tag node-web-app:latest "$DOCKER_USER"/node-web-app:latest
+    - run : docker image tag node-web-app:latest "$DOCKER_USER/node-web-app:latest"
     - run : docker images
     - name: Push to DockerHub
-      run: docker push "$DOCKER_USER"/node-web-app
+      run: docker push "$DOCKER_USER/node-web-app"
 
