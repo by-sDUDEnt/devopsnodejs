@@ -36,10 +36,10 @@ jobs:
     - run : docker images
     - run : docker info
     - name: Upload frontend image as artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: bysdudent/node-web-app
-          path: /var/lib/docker/node-web-app.tar
+      uses: actions/upload-artifact@v2
+      with:
+        name: bysdudent/node-web-app
+        path: /var/lib/docker/node-web-app.tar
 
   push:
     runs-on: ubuntu-latest
@@ -47,7 +47,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - uses: actions/download-artifact@v2
-        with:
+      with:
         name: bysdudent/node-web-app
     - name: Login to Docker Hub
       env:
