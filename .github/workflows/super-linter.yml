@@ -31,6 +31,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    - run : cd /var/lib/
     - name: Build the Docker image
       run: docker build . -t bysdudent/node-web-app
     - run : docker images
