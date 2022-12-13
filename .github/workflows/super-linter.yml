@@ -41,9 +41,9 @@ jobs:
     #     name: bysdudent/node-web-app
     #     path: /var/lib/docker/node-web-app.tar
     
-    uses: ishworkh/docker-image-artifact-upload@v1
-    with:
-      image: "node-web-app:latest"
+    - uses: ishworkh/docker-image-artifact-upload@v1
+      with:
+        image: "node-web-app:latest"
 
   push:
     runs-on: ubuntu-latest
@@ -55,9 +55,9 @@ jobs:
         DOCKER_USER: ${{ secrets.DOCKER_USER }}
         DOCKER_PASSWORD : ${{ secrets.DOCKER_PASSWORD }}
       run : docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
-     - uses: ishworkh/docker-image-artifact-download@v1
-       with:
-         image: "node-web-app:latest"
+    - uses: ishworkh/docker-image-artifact-download@v1
+      with:
+          image: "node-web-app:latest"
 
     - run : docker images
     - name: Push to DockerHub
