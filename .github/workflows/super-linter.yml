@@ -57,9 +57,11 @@ jobs:
       run : docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
     - uses: ishworkh/docker-image-artifact-download@v1
       with:
-          image: "node-web-app:latest"
-
+          image: "action_image_artifact_node-web-app_latest"
     - run : docker images
+    - run : docker image tag action_image_artifact_node-web-app_latest node-web-app:latest
+    - run : docker images
+    - run : docker load node-web-app
     - name: Push to DockerHub
       run: docker push bysdudent/node-web-app
 
