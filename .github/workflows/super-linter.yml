@@ -34,7 +34,8 @@ jobs:
     - name: Build the Docker image
       run: docker build . -t bysdudent/node-web-app
     - run : docker images
-    - run : docker save -o . bysdudent/node-web-app
+    - run : docker save -o /tmp bysdudent/node-web-app
+    - run : ls
 
   push:
     runs-on: ubuntu-latest
