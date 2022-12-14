@@ -28,7 +28,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   build:
     runs-on: ubuntu-latest
-    # needs: [run-lint]
+    needs: [run-lint]
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
@@ -53,8 +53,8 @@ jobs:
       with:
           image: "node-web-app:latest"
     - run : docker images
-    - run : docker image tag node-web-app:latest ${{ env.DOCKER_USER }}/node-web-app:latest
+    - run : docker image tag node-web-app:latest bysdudent/node-web-app:latest
     - run : docker images
     - name: Push to DockerHub
-      run: docker push ${{ env.DOCKER_USER }}/node-web-app
+      run: docker push bysdudent/node-web-app
 
