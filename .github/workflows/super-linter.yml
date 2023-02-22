@@ -26,35 +26,4 @@ jobs:
           VALIDATE_ALL_CODEBASE: false
           DEFAULT_BRANCH: "main"
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  build:
-    runs-on: ubuntu-latest
-    needs: [run-lint]
-    steps:
-    - uses: actions/checkout@v3
-    - name: Build the Docker image
-      run: docker build . -t node-web-app
-    - run : docker images
-    - run : docker info
-    - uses: ishworkh/docker-image-artifact-upload@v1
-      with:
-        image: "node-web-app:latest"
-
-  push:
-    runs-on: ubuntu-latest
-    needs: [build]
-    steps:
-    - uses: actions/checkout@v3
-    - name: Login to Docker Hub
-      env:
-        DOCKER_USER: ${{ secrets.DOCKER_USER }}
-        DOCKER_PASSWORD : ${{ secrets.DOCKER_PASSWORD }}
-      run : docker login -u "$DOCKER_USER" -p "$DOCKER_PASSWORD"
-    - uses: ishworkh/docker-image-artifact-download@v1
-      with:
-          image: "node-web-app:latest"
-    - run : docker images
-    - run : docker image tag node-web-app:latest bysdudent/node-web-app:latest
-    - run : docker images
-    - name: Push to DockerHub
-      run: docker push bysdudent/node-web-app
 

@@ -9,7 +9,7 @@ const HOST = '0.0.0.0';
 
 const app = express();
 app.get('/', (req, res) => {
-  res.send('what a great view!!!! <img src="https://c.files.bbci.co.uk/64FB/production/_127015852_mediaitem127015851.jpg">');
+  res.send('what a great view!!!!');
 });
 
 app.listen(PORT, HOST, () => {
